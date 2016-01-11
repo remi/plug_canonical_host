@@ -14,9 +14,9 @@ defmodule PlugCanonicalHost do
     </html>
   """
 
-  def init(canonical_host), do: canonical_host
+  def init([canonical_host: canonical_host]), do: [canonical_host: canonical_host]
 
-  def call(conn = %Plug.Conn{host: host}, canonical_host) when host !== canonical_host do
+  def call(conn = %Plug.Conn{host: host}, [canonical_host: canonical_host]) when host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
     conn
