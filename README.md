@@ -1,10 +1,14 @@
 # PlugCanonicalHost
 
-[What is that?]
+`PlugCanonicalHost` ensures that all your Elixir application requests are
+coming through a single canonical host.
+
+It will redirect all requests from non-canonical hosts to the canonical one.
 
 ## Installation
 
-Add `plug_canonical_host` to the `deps` function in your project's `mix.exs` file:
+Add `plug_canonical_host` to the `deps` function in your project's `mix.exs`
+file:
 
 ```elixir
 defp deps do
@@ -16,7 +20,9 @@ Then run `mix do deps.get, deps.compile` inside your project's directory.
 
 ## Usage
 
-PlugBasicAuth can be used just as any other Plug. Add PlugBasicAuth before all of the other plugs you want to happen after successful redirection to your canonical host.
+`PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost`
+before all of the other plugs you want to happen after successful redirection
+to your canonical host.
 
 ```elixir
 defmodule Endpoint do
@@ -26,4 +32,6 @@ end
 
 ## License
 
-PlugCanonicalHost is © 2016 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remiprev/teamocil/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
+`PlugCanonicalHost` is © 2016 [Rémi Prévost](http://exomel.com) and may be
+freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the
+`LICENSE.md` file for more information.
