@@ -12,7 +12,10 @@ file:
 
 ```elixir
 defp deps do
-  [{:plug_basic_auth, "~> 0.1"}]
+  [
+    …,
+    {:plug_basic_auth, "~> 0.1"}
+  ]
 end
 ```
 
