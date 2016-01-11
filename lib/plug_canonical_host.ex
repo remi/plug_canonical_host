@@ -36,6 +36,6 @@ defmodule PlugCanonicalHost do
   end
 
   defp request_uri(conn) do
-    "#{conn.scheme}://#{conn.host}:#{conn.port}#{conn.request_path}#{conn.query_string}"
+    "#{conn.scheme}://#{conn.host}:#{conn.port}#{conn.request_path}?#{conn.query_string}"
   end
 end
