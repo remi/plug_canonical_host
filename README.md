@@ -29,7 +29,7 @@ to your canonical host.
 
 ```elixir
 defmodule Endpoint do
-  plug PlugCanonicalHost, canonical_host: "www.example.com"
+  plug PlugCanonicalHost, "www.example.com"
 end
 ```
 
