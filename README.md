@@ -14,7 +14,7 @@ file:
 defp deps do
   [
     …,
-    {:plug_basic_auth, "~> 0.1"}
+    {:plug_canonical_host, "~> 0.1"}
   ]
 end
 ```
