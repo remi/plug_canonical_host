@@ -1,13 +1,12 @@
 # PlugCanonicalHost
 
-`PlugCanonicalHost` ensures that all requests are served by a single canonical host
+`PlugCanonicalHost` ensures that all requests are served by a single canonical host.
 
 It will redirect all requests from non-canonical hosts to the canonical one.
 
 ## Installation
 
-Add `plug_canonical_host` to the `deps` function in your project's `mix.exs`
-file:
+Add `plug_canonical_host` to the `deps` function in your project's `mix.exs` file:
 
 ```elixir
 defp deps do
