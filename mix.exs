@@ -1,9 +1,11 @@
 defmodule PlugCanonicalHost.Mixfile do
   use Mix.Project
 
+  @version "0.2.0"
+
   def project do
     [app: :plug_canonical_host,
-     version: "0.2.0",
+     version: @version,
      elixir: "~> 1.0",
      deps: deps,
      package: package,
@@ -21,8 +23,8 @@ defmodule PlugCanonicalHost.Mixfile do
   defp deps do
     [
       {:plug, " ~> 1.0"},
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev}
+      {:earmark, "~> 0.1", only: :docs},
+      {:ex_doc, "~> 0.11", only: :docs}
     ]
   end
 
