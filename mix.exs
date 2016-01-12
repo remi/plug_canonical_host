@@ -10,8 +10,8 @@ defmodule PlugCanonicalHost.Mixfile do
      name: "Plug Canonical Host",
      source_url: "https://github.com/remiprev/plug_canonical_host",
      homepage_url: "https://github.com/remiprev/plug_canonical_host",
-     description: "A Plug for ensuring that all requests are made to a single canonical host",
-     docs: [readme: "README.md", main: "README"]]
+     description: "A Plug for ensuring that all requests are served by a single canonical host",
+     docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/elixir-lang/plug"]]
   end
 
   def application do
@@ -19,7 +19,11 @@ defmodule PlugCanonicalHost.Mixfile do
   end
 
   defp deps do
-    [{:plug, " ~> 1.0"}]
+    [
+      {:plug, " ~> 1.0"},
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev}
+    ]
   end
 
   defp package do
@@ -27,7 +31,8 @@ defmodule PlugCanonicalHost.Mixfile do
       maintainers: ["Rémi Prévost"],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/remiprev/plug_canonical_host"
+        "GitHub" => "https://github.com/remiprev/plug_canonical_host",
+        "Docs" => "http://hexdocs.pm/plug_canonical_host"
       }
     }
   end

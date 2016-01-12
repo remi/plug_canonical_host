@@ -1,7 +1,6 @@
 # PlugCanonicalHost
 
-`PlugCanonicalHost` ensures that all your Elixir application requests are
-coming through a single canonical host.
+`PlugCanonicalHost` ensures that all requests are served by a single canonical host
 
 It will redirect all requests from non-canonical hosts to the canonical one.
 

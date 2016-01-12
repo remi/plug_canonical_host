@@ -1,4 +1,8 @@
 defmodule PlugCanonicalHost do
+  @moduledoc """
+  A Plug for ensuring that all requests are served by a single canonical host
+  """
+
   import Plug.Conn
 
   @location_header "location"
@@ -14,8 +18,14 @@ defmodule PlugCanonicalHost do
     </html>
   """
 
+  @doc """
+  Initialize this plug with a canonical host option.
+  """
   def init([canonical_host: canonical_host]), do: [canonical_host: canonical_host]
 
+  @doc """
+  Call the plug.
+  """
   def call(conn = %Plug.Conn{host: host}, [canonical_host: canonical_host]) when host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
