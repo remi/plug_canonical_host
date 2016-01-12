@@ -32,7 +32,7 @@ defmodule PlugCanonicalHost.Mixfile do
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/remiprev/plug_canonical_host",
-        "Docs" => "http://hexdocs.pm/plug_canonical_host"
+        "Docs" => "http://hexdocs.pm/plug_canonical_host/"
       }
     }
   end
