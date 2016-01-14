@@ -34,4 +34,18 @@ defmodule PlugCanonicalHostTest do
     assert conn.status == 200
     assert conn.resp_body == "Hello World"
   end
+
+  test "does not redirect when canonical host is an empty string" do
+    conn = %Plug.Conn{host: "www.example.com", status: 200}
+    |> PlugCanonicalHost.call(canonical_host: "")
+
+    assert conn.status == 200
+  end
+
+  test "does not redirect when canonical host is nil" do
+    conn = %Plug.Conn{host: "www.example.com", status: 200}
+    |> PlugCanonicalHost.call(canonical_host: nil)
+
+    assert conn.status == 200
+  end
 end
