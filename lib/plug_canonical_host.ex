@@ -26,7 +26,8 @@ defmodule PlugCanonicalHost do
   @doc """
   Call the plug.
   """
-  def call(conn = %Plug.Conn{host: host}, [canonical_host: canonical_host]) when host !== canonical_host do
+  def call(conn = %Plug.Conn{host: host}, [canonical_host: canonical_host])
+    when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
     conn
