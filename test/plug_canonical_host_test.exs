@@ -34,5 +34,4 @@ defmodule PlugCanonicalHostTest do
     assert conn.status == 200
     assert conn.resp_body == "Hello World"
   end
-
 end
