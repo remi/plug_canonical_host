@@ -21,12 +21,12 @@ defmodule PlugCanonicalHost do
   @doc """
   Initialize this plug with a canonical host option.
   """
-  def init([canonical_host: canonical_host]), do: [canonical_host: canonical_host]
+  def init(opts), do: Keyword.fetch!(opts, :canonical_host)
 
   @doc """
   Call the plug.
   """
-  def call(conn = %Plug.Conn{host: host}, [canonical_host: canonical_host])
+  def call(conn = %Plug.Conn{host: host}, canonical_host)
     when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
