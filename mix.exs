@@ -6,7 +6,7 @@ defmodule PlugCanonicalHost.Mixfile do
   def project do
     [app: :plug_canonical_host,
      version: @version,
-     elixir: "~> 1.0",
+     elixir: "~> 1.1",
      deps: deps,
      package: package,
      name: "Plug Canonical Host",

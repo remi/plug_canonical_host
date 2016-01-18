@@ -1,6 +1,9 @@
 PlugCanonicalHost
 =================
 
+[![Travis](https://img.shields.io/travis/remiprev/plug_canonical_host.svg?style=flat-square)](https://travis-ci.org/remiprev/plug_canonical_host)
+[![Hex.pm](https://img.shields.io/hexpm/v/plug_canonical_host.svg?style=flat-square)](https://hex.pm/packages/plug_canonical_host)
+
 `PlugCanonicalHost` ensures that all requests are served by a single canonical
 host. It will redirect all requests from non-canonical hosts to the canonical
 one.
