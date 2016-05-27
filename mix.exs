@@ -33,8 +33,7 @@ defmodule PlugCanonicalHost.Mixfile do
       maintainers: ["Rémi Prévost"],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/remiprev/plug_canonical_host",
-        "Docs" => "http://hexdocs.pm/plug_canonical_host/"
+        "GitHub" => "https://github.com/remiprev/plug_canonical_host"
       }
     }
   end
