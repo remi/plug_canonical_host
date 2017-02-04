@@ -13,7 +13,7 @@ defmodule PlugCanonicalHost.Mixfile do
      source_url: "https://github.com/remiprev/plug_canonical_host",
      homepage_url: "https://github.com/remiprev/plug_canonical_host",
      description: "A Plug for ensuring that all requests are served by a single canonical host",
-     docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/elixir-lang/plug"]]
+     docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]]
   end
 
   def application do
