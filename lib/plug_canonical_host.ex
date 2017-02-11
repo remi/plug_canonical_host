@@ -47,6 +47,13 @@ defmodule PlugCanonicalHost do
   end
 
   defp request_uri(conn) do
-    "#{conn.scheme}://#{conn.host}:#{conn.port}#{conn.request_path}?#{conn.query_string}"
+    "#{conn.scheme}://#{conn.host}:#{canonical_port(conn)}#{conn.request_path}?#{conn.query_string}"
+  end
+
+  defp canonical_port(conn = %Plug.Conn{port: port}) do
+    case get_req_header(conn, "x-forwarded-port") do
+      [forwarded_port] -> forwarded_port
+      [] -> port
+    end
   end
 end
