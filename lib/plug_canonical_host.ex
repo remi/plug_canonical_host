@@ -12,6 +12,7 @@ defmodule PlugCanonicalHost do
   # Behaviours
   @behaviour Plug
 
+  # Constants
   @location_header "location"
   @forwarded_port_header "x-forwarded-port"
   @status_code 301
