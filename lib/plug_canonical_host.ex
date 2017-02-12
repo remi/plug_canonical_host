@@ -3,7 +3,11 @@ defmodule PlugCanonicalHost do
   A Plug for ensuring that all requests are served by a single canonical host
   """
 
+  # Imports
   import Plug.Conn
+
+  # Aliases
+  alias Plug.Conn
 
   @location_header "location"
   @status_code 301
@@ -21,12 +25,14 @@ defmodule PlugCanonicalHost do
   @doc """
   Initialize this plug with a canonical host option.
   """
+  @spec init([{atom, any}]) :: any
   def init(opts), do: Keyword.fetch!(opts, :canonical_host)
 
   @doc """
   Call the plug.
   """
-  def call(conn = %Plug.Conn{host: host}, canonical_host)
+  @spec call(%Conn{}, String.t) :: %Conn{}
+  def call(conn = %Conn{host: host}, canonical_host)
     when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
@@ -35,9 +41,9 @@ defmodule PlugCanonicalHost do
     |> send_resp(@status_code, String.replace(@html_template, "%s", location))
     |> halt
   end
-
   def call(conn, _), do: conn
 
+  @spec redirect_location(%Conn{}, String.t) :: String.t
   defp redirect_location(conn, canonical_host) do
     conn
     |> request_uri
@@ -46,11 +52,13 @@ defmodule PlugCanonicalHost do
     |> URI.to_string
   end
 
-  defp request_uri(conn) do
-    "#{conn.scheme}://#{conn.host}:#{canonical_port(conn)}#{conn.request_path}?#{conn.query_string}"
+  @spec request_uri(%Conn{}) :: String.t
+  defp request_uri(conn = %Conn{scheme: scheme, host: host, request_path: request_path, query_string: query_string}) do
+    "#{scheme}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
   end
 
-  defp canonical_port(conn = %Plug.Conn{port: port}) do
+  @spec canonical_port(%Conn{}) :: String.t | integer
+  defp canonical_port(conn = %Conn{port: port}) do
     case get_req_header(conn, "x-forwarded-port") do
       [forwarded_port] -> forwarded_port
       [] -> port
