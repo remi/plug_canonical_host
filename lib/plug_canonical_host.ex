@@ -9,6 +9,9 @@ defmodule PlugCanonicalHost do
   # Aliases
   alias Plug.Conn
 
+  # Behaviours
+  @behaviour Plug
+
   @location_header "location"
   @status_code 301
   @html_template """
@@ -22,16 +25,19 @@ defmodule PlugCanonicalHost do
     </html>
   """
 
+  # Types
+  @type opts :: binary | tuple | atom | integer | float | [opts] | %{opts => opts}
+
   @doc """
   Initialize this plug with a canonical host option.
   """
-  @spec init([{atom, any}]) :: any
+  @spec init(opts) :: opts
   def init(opts), do: Keyword.fetch!(opts, :canonical_host)
 
   @doc """
   Call the plug.
   """
-  @spec call(%Conn{}, String.t) :: %Conn{}
+  @spec call(%Conn{}, opts) :: %Conn{}
   def call(conn = %Conn{host: host}, canonical_host)
     when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
