@@ -1,4 +1,6 @@
-%{"earmark": {:hex, :earmark, "0.2.1", "ba6d26ceb16106d069b289df66751734802777a3cbb6787026dd800ffeb850f3", [:mix], []},
+%{"bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
+  "credo": {:hex, :credo, "0.6.1", "a941e2591bd2bd2055dc92b810c174650b40b8290459c89a835af9d59ac4a5f8", [:mix], [{:bunt, "~> 0.2.0", [hex: :bunt, optional: false]}]},
+  "earmark": {:hex, :earmark, "0.2.1", "ba6d26ceb16106d069b289df66751734802777a3cbb6787026dd800ffeb850f3", [:mix], []},
   "ex_doc": {:hex, :ex_doc, "0.11.3", "bb16cb3f4135d880ce25279dc19a9d70802bc4f4942f0c3de9e4862517ae3ace", [:mix], [{:earmark, "~> 0.1.17 or ~> 0.2", [hex: :earmark, optional: true]}]},
   "inch_ex": {:hex, :inch_ex, "0.4.0"},
   "plug": {:hex, :plug, "1.1.0", "69078a481549b81e879e169fbe099a509baf8d6a793db757f39f86258f91db07", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
