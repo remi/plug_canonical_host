@@ -11,4 +11,5 @@ otp_release:
 
 script:
   - mix credo --strict
+  - mix dialyzer --halt-exit-status
   - mix test
