@@ -13,6 +13,7 @@ defmodule PlugCanonicalHost do
   @behaviour Plug
 
   @location_header "location"
+  @forwarded_port_header "x-forwarded-port"
   @status_code 301
   @html_template """
     <!DOCTYPE html>
@@ -65,7 +66,7 @@ defmodule PlugCanonicalHost do
 
   @spec canonical_port(%Conn{}) :: String.t | integer
   defp canonical_port(conn = %Conn{port: port}) do
-    case get_req_header(conn, "x-forwarded-port") do
+    case get_req_header(conn, @forwarded_port_header) do
       [forwarded_port] -> forwarded_port
       [] -> port
     end
