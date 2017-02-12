@@ -23,6 +23,7 @@ defmodule PlugCanonicalHost.Mixfile do
   defp deps do
     [
       {:plug, " ~> 1.0"},
+      {:credo, "~> 0.5", only: :dev},
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev}
     ]
