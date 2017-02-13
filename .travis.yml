@@ -9,6 +9,14 @@ elixir:
 otp_release:
   - 18.2
 
+cache:
+  directories:
+    - .plts
+
+before_script:
+  - mkdir -p .plts
+  - "[[ -f .plts/local.plt ]] || mix dialyzer --plt"
+
 script:
   - mix credo --strict
   - mix dialyzer --halt-exit-status
