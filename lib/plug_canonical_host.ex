@@ -40,8 +40,14 @@ defmodule PlugCanonicalHost do
   Call the plug.
   """
   @spec call(%Conn{}, opts) :: %Conn{}
+  def call(conn = %Conn{host: _host}, {:system, env_var}) do
+    canonical_host = System.get_env(env_var)
+    call(conn, canonical_host)
+  end
+  @spec call(%Conn{}, opts) :: %Conn{}
   def call(conn = %Conn{host: host}, canonical_host)
     when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
+
     location = conn |> redirect_location(canonical_host)
 
     conn
