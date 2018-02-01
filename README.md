@@ -37,9 +37,15 @@ defmodule Endpoint do
 end
 ```
 
-For example, If your application is accessible via both `example.com` and
+For example, if your application is accessible via both `example.com` and
 `www.example.com`, all traffic coming through `example.com` will be redirected
 (with a `301` HTTP status) to the matching `wwww.example.com` URL.
+
+```bash
+$ curl -sI http://example.com/foo?bar=1
+> HTTP/1.1 301 Moved Permanently
+> Location: http://www.example.com/foo?bar=1
+```
 
 License
 -------
