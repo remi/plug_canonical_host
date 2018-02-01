@@ -50,6 +50,6 @@ $ curl -sI http://example.com/foo?bar=1
 License
 -------
 
-`PlugCanonicalHost` is © 2016-2017 [Rémi Prévost](http://exomel.com) and may be
+`PlugCanonicalHost` is © 2016-2018 [Rémi Prévost](http://exomel.com) and may be
 freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the
 `LICENSE.md` file for more information.
