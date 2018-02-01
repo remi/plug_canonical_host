@@ -42,9 +42,9 @@ For example, if your application is accessible via both `example.com` and
 (with a `301` HTTP status) to the matching `wwww.example.com` URL.
 
 ```bash
-$ curl -sI http://example.com/foo?bar=1
-> HTTP/1.1 301 Moved Permanently
-> Location: http://www.example.com/foo?bar=1
+$ curl -sI "http://example.com/foo?bar=1"
+#> HTTP/1.1 301 Moved Permanently
+#> Location: http://www.example.com/foo?bar=1
 ```
 
 License
