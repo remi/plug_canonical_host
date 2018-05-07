@@ -19,5 +19,6 @@ before_script:
 
 script:
   - mix credo --strict
+  - mix format --check-formatted --dry-run
   - mix dialyzer --halt-exit-status
   - mix test

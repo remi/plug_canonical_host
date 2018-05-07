@@ -4,17 +4,19 @@ defmodule PlugCanonicalHost.Mixfile do
   @version "0.3.0"
 
   def project do
-    [app: :plug_canonical_host,
-     version: @version,
-     elixir: "~> 1.1",
-     deps: deps(),
-     package: package(),
-     dialyzer: dialyzer(),
-     name: "Plug Canonical Host",
-     source_url: "https://github.com/remiprev/plug_canonical_host",
-     homepage_url: "https://github.com/remiprev/plug_canonical_host",
-     description: "A Plug for ensuring that all requests are served by a single canonical host",
-     docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]]
+    [
+      app: :plug_canonical_host,
+      version: @version,
+      elixir: "~> 1.1",
+      deps: deps(),
+      package: package(),
+      dialyzer: dialyzer(),
+      name: "Plug Canonical Host",
+      source_url: "https://github.com/remiprev/plug_canonical_host",
+      homepage_url: "https://github.com/remiprev/plug_canonical_host",
+      description: "A Plug for ensuring that all requests are served by a single canonical host",
+      docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]
+    ]
   end
 
   def application do
@@ -22,9 +24,7 @@ defmodule PlugCanonicalHost.Mixfile do
   end
 
   def dialyzer do
-    [plt_add_apps: [:plug],
-     plt_file: ".plts/.local.plt",
-     plt_core_path: ".plts"]
+    [plt_add_apps: [:plug], plt_file: ".plts/.local.plt", plt_core_path: ".plts"]
   end
 
   defp deps do

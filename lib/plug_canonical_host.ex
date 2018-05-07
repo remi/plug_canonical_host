@@ -41,7 +41,7 @@ defmodule PlugCanonicalHost do
   """
   @spec call(%Conn{}, opts) :: %Conn{}
   def call(conn = %Conn{host: host}, canonical_host)
-    when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
+      when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
     location = conn |> redirect_location(canonical_host)
 
     conn
@@ -49,23 +49,24 @@ defmodule PlugCanonicalHost do
     |> send_resp(@status_code, String.replace(@html_template, "%s", location))
     |> halt
   end
+
   def call(conn, _), do: conn
 
-  @spec redirect_location(%Conn{}, String.t) :: String.t
+  @spec redirect_location(%Conn{}, String.t()) :: String.t()
   defp redirect_location(conn, canonical_host) do
     conn
     |> request_uri
-    |> URI.parse
+    |> URI.parse()
     |> Map.put(:host, canonical_host)
-    |> URI.to_string
+    |> URI.to_string()
   end
 
-  @spec request_uri(%Conn{}) :: String.t
+  @spec request_uri(%Conn{}) :: String.t()
   defp request_uri(conn = %Conn{scheme: scheme, host: host, request_path: request_path, query_string: query_string}) do
     "#{scheme}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
   end
 
-  @spec canonical_port(%Conn{}) :: String.t | integer
+  @spec canonical_port(%Conn{}) :: String.t() | integer
   defp canonical_port(conn = %Conn{port: port}) do
     case get_req_header(conn, @forwarded_port_header) do
       [forwarded_port] -> forwarded_port
