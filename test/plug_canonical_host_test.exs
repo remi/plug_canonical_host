@@ -36,6 +36,18 @@ defmodule PlugCanonicalHostTest do
     assert get_resp_header(conn, "location") === ["https://example.com/foo?bar=1"]
   end
 
+  test "redirects to forwarded proto" do
+    conn =
+      :get
+      |> conn("http://www.example.com/foo?bar=1")
+      |> put_req_header("x-forwarded-proto", "https")
+      |> put_req_header("x-forwarded-port", "443")
+      |> TestApp.call(TestApp.init([]))
+
+    assert conn.status == 301
+    assert get_resp_header(conn, "location") === ["https://example.com/foo?bar=1"]
+  end
+
   test "does not redirect to canonical host when already on canonical host" do
     conn =
       :get

@@ -15,6 +15,7 @@ defmodule PlugCanonicalHost do
   # Constants
   @location_header "location"
   @forwarded_port_header "x-forwarded-port"
+  @forwarded_proto_header "x-forwarded-proto"
   @status_code 301
   @html_template """
     <!DOCTYPE html>
@@ -63,7 +64,7 @@ defmodule PlugCanonicalHost do
 
   @spec request_uri(%Conn{}) :: String.t()
   defp request_uri(conn = %Conn{scheme: scheme, host: host, request_path: request_path, query_string: query_string}) do
-    "#{scheme}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
+    "#{canonical_scheme(conn)}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
   end
 
   @spec canonical_port(%Conn{}) :: String.t() | integer
@@ -71,6 +72,14 @@ defmodule PlugCanonicalHost do
     case get_req_header(conn, @forwarded_port_header) do
       [forwarded_port] -> forwarded_port
       [] -> port
+    end
+  end
+
+  @spec canonical_scheme(%Conn{}) :: String.t() | string
+  defp canonical_scheme(conn = %Conn{scheme: scheme}) do
+    case get_req_header(conn, @forwarded_proto_header) do
+      [forwarded_proto] -> forwarded_proto
+      [] -> scheme
     end
   end
 end
