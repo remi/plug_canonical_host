@@ -7,14 +7,14 @@ defmodule PlugCanonicalHost.Mixfile do
     [
       app: :plug_canonical_host,
       version: @version,
-      elixir: "~> 1.1",
+      elixir: "~> 1.4",
       deps: deps(),
       package: package(),
       dialyzer: dialyzer(),
       name: "Plug Canonical Host",
       source_url: "https://github.com/remiprev/plug_canonical_host",
       homepage_url: "https://github.com/remiprev/plug_canonical_host",
-      description: "A Plug for ensuring that all requests are served by a single canonical host",
+      description: "A Plug to ensure that all HTTP/HTTPS requests are served through a single canonical host",
       docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]
     ]
   end
