@@ -31,9 +31,29 @@ Usage
 before all of the other plugs you want to happen after successful redirection
 to your canonical host.
 
+The recommended way to define a canonical host is with an environment variable.
+
 ```elixir
-defmodule Endpoint do
-  plug PlugCanonicalHost, canonical_host: "www.example.com"
+# config/config.ex
+config :my_app,
+  canonical_host: System.get_env("CANONICAL_HOST")
+
+# lib/my_app/endpoint.ex
+defmodule MyApp.Endpoint do
+  plug(:canonical_host)
+
+  defp canonical_host(conn, _opts) do
+    :my_app
+    |> Application.get_env(:canonical_host)
+    |> case do
+      host when is_binary(host) ->
+        opts = PlugCanonicalHost.init(canonical_host: host)
+        PlugCanonicalHost.call(conn, opts)
+
+      _ ->
+      conn
+    end
+  end
 end
 ```
 
