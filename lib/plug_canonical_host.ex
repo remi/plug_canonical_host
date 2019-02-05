@@ -63,7 +63,7 @@ defmodule PlugCanonicalHost do
   end
 
   @spec request_uri(%Conn{}) :: String.t()
-  defp request_uri(conn = %Conn{scheme: _scheme, host: host, request_path: request_path, query_string: query_string}) do
+  defp request_uri(conn = %Conn{host: host, request_path: request_path, query_string: query_string}) do
     "#{canonical_scheme(conn)}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
   end
 
