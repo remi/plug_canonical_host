@@ -63,11 +63,11 @@ defmodule PlugCanonicalHost do
   end
 
   @spec request_uri(%Conn{}) :: String.t()
-  defp request_uri(conn = %Conn{scheme: scheme, host: host, request_path: request_path, query_string: query_string}) do
+  defp request_uri(conn = %Conn{host: host, request_path: request_path, query_string: query_string}) do
     "#{canonical_scheme(conn)}://#{host}:#{canonical_port(conn)}#{request_path}?#{query_string}"
   end
 
-  @spec canonical_port(%Conn{}) :: String.t() | integer
+  @spec canonical_port(%Conn{}) :: binary | integer
   defp canonical_port(conn = %Conn{port: port}) do
     case get_req_header(conn, @forwarded_port_header) do
       [forwarded_port] -> forwarded_port
@@ -75,7 +75,7 @@ defmodule PlugCanonicalHost do
     end
   end
 
-  @spec canonical_scheme(%Conn{}) :: String.t() | string
+  @spec canonical_scheme(%Conn{}) :: binary
   defp canonical_scheme(conn = %Conn{scheme: scheme}) do
     case get_req_header(conn, @forwarded_proto_header) do
       [forwarded_proto] -> forwarded_proto
