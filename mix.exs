@@ -31,8 +31,8 @@ defmodule PlugCanonicalHost.Mixfile do
     [
       {:plug, " ~> 1.0"},
       {:credo, "~> 0.6", only: :dev},
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev},
       {:dialyxir, "~> 0.5", only: :dev}
     ]
   end
