@@ -35,20 +35,29 @@ defmodule PlugCanonicalHost do
   Initialize this plug with a canonical host option.
   """
   @spec init(opts) :: opts
-  def init(opts), do: Keyword.fetch!(opts, :canonical_host)
+  def init(opts) do
+    [
+      canonical_host: Keyword.fetch!(opts, :canonical_host),
+      ignored_hosts: Keyword.get(opts, :ignored_hosts, [])
+    ]
+  end
 
   @doc """
   Call the plug.
   """
   @spec call(%Conn{}, opts) :: Conn.t()
-  def call(conn = %Conn{host: host}, canonical_host)
+  def call(conn = %Conn{host: host}, canonical_host: canonical_host, ignored_hosts: ignored_hosts)
       when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
-    location = conn |> redirect_location(canonical_host)
+    if host in ignored_hosts do
+      conn
+    else
+      location = conn |> redirect_location(canonical_host)
 
-    conn
-    |> put_resp_header(@location_header, location)
-    |> send_resp(@status_code, String.replace(@html_template, "%s", location))
-    |> halt
+      conn
+      |> put_resp_header(@location_header, location)
+      |> send_resp(@status_code, String.replace(@html_template, "%s", location))
+      |> halt
+    end
   end
 
   def call(conn, _), do: conn
