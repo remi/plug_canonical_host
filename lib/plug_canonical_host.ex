@@ -58,6 +58,7 @@ defmodule PlugCanonicalHost do
     conn
     |> request_uri
     |> URI.parse()
+    |> sanitize_empty_query()
     |> Map.put(:host, canonical_host)
     |> URI.to_string()
   end
@@ -82,4 +83,8 @@ defmodule PlugCanonicalHost do
       [] -> scheme
     end
   end
+
+  @spec sanitize_empty_query(%URI{}) :: %URI{}
+  def sanitize_empty_query(uri = %URI{query: ""}), do: Map.put(uri, :query, nil)
+  def sanitize_empty_query(uri), do: uri
 end

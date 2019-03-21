@@ -17,6 +17,16 @@ defmodule PlugCanonicalHostTest do
   test "redirects to canonical host" do
     conn =
       :get
+      |> conn("http://www.example.com/")
+      |> TestApp.call(TestApp.init([]))
+
+    assert conn.status == 301
+    assert get_resp_header(conn, "location") === ["http://example.com/"]
+  end
+
+  test "redirects to canonical host with query string" do
+    conn =
+      :get
       |> conn("http://www.example.com/foo?bar=1")
       |> TestApp.call(TestApp.init([]))
 
