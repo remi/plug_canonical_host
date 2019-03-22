@@ -51,7 +51,7 @@ defmodule MyApp.Endpoint do
         PlugCanonicalHost.call(conn, opts)
 
       _ ->
-      conn
+        conn
     end
   end
 end
