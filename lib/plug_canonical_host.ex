@@ -38,7 +38,7 @@ defmodule PlugCanonicalHost do
   def init(opts) do
     [
       canonical_host: Keyword.fetch!(opts, :canonical_host),
-      ignored_hosts: Keyword.get(opts, :ignored_hosts, [])
+      ignore: Keyword.get(opts, :ignore, fn _ -> false end)
     ]
   end
 
@@ -46,9 +46,9 @@ defmodule PlugCanonicalHost do
   Call the plug.
   """
   @spec call(%Conn{}, opts) :: Conn.t()
-  def call(conn = %Conn{host: host}, canonical_host: canonical_host, ignored_hosts: ignored_hosts)
+  def call(conn = %Conn{host: host}, canonical_host: canonical_host, ignore: ignore)
       when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
-    if host in ignored_hosts do
+    if ignore.(conn) do
       conn
     else
       location = conn |> redirect_location(canonical_host)

@@ -67,10 +67,10 @@ $ curl -sI "http://example.com/foo?bar=1"
 #> Location: http://www.example.com/foo?bar=1
 ```
 
-You can also specify hosts to ignore (ie. that will let requests through without redirecting to the canonical host).
+You can also specify requests to ignore (ie. that will pass through without redirecting to the canonical host).
 
 ```elixir
-PlugCanonicalHost.init(canonical_host: "www.example.com", ignored_hosts: ["www.example.org"])
+PlugCanonicalHost.init(canonical_host: "www.example.com", ignore: fn(%Conn{host: host}) -> host in ["www.example.org"] end)
 ```
 
 Assuming `example.com`, `www.example.com` and `www.example.org` all point to our application:
