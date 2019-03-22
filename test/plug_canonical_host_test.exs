@@ -5,12 +5,21 @@ defmodule PlugCanonicalHostTest do
   defmodule TestApp do
     use Plug.Router
 
-    plug(PlugCanonicalHost, canonical_host: "example.com", ignored_hosts: ["example.org"])
+    plug(PlugCanonicalHost, canonical_host: "example.com", ignore: &TestApp.ignore_proxy_requests/1)
     plug(:match)
     plug(:dispatch)
 
     get "/foo" do
       conn |> send_resp(200, "Hello World")
+    end
+
+    def ignore_proxy_requests(conn) do
+      conn
+      |> get_req_header("x-from-proxy")
+      |> case do
+        [] -> false
+        _ -> true
+      end
     end
   end
 
@@ -68,10 +77,11 @@ defmodule PlugCanonicalHostTest do
     assert conn.resp_body == "Hello World"
   end
 
-  test "does not redirect to canonical host when on an ignored host" do
+  test "does not redirect to canonical host when from an ignored request" do
     conn =
       :get
       |> conn("http://example.org/foo")
+      |> put_req_header("x-from-proxy", "abc123")
       |> TestApp.call(TestApp.init([]))
 
     assert conn.status == 200
