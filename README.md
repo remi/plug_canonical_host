@@ -34,7 +34,7 @@ to your canonical host.
 The recommended way to define a canonical host is with an environment variable.
 
 ```elixir
-# config/config.ex
+# config/config.exs
 config :my_app,
   canonical_host: System.get_env("CANONICAL_HOST")
 
