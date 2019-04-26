@@ -1,9 +1,11 @@
-<div align="center">
+<p align="center">
   <img src="https://user-images.githubusercontent.com/11348/56806359-b6a07f00-67f9-11e9-96bd-6a456a96880c.png" width="600" />
-  <p><br /><code>PlugCanonicalHost</code> ensures that all requests are served by a single canonical host.<br /> It will redirect all requests from non-canonical hosts to the canonical one.</p>
+  <br /><br />
+  <code>PlugCanonicalHost</code> ensures that all requests are served by a single canonical host.<br /> It will redirect all requests from non-canonical hosts to the canonical one.
+  <br /><br />
   <a href="https://travis-ci.org/remiprev/plug_canonical_host"><img src="https://travis-ci.org/remiprev/plug_canonical_host.svg?branch=master" /></a>
   <a href="https://hex.pm/packages/plug_canonical_host"><img src="https://img.shields.io/hexpm/v/plug_canonical_host.svg" /></a>
-</div>
+</p>
 
 Installation
 ------------
