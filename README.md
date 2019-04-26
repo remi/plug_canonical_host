@@ -24,9 +24,7 @@ Then run `mix do deps.get, deps.compile` inside your project's directory.
 Usage
 -----
 
-`PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost`
-before all of the other plugs you want to happen after successful redirection
-to your canonical host.
+`PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost` before all of the other plugs you want to happen after successful redirection to your canonical host.
 
 The recommended way to define a canonical host is with an environment variable.
 
@@ -54,9 +52,7 @@ defmodule MyApp.Endpoint do
 end
 ```
 
-For example, if your application is accessible via both `example.com` and
-`www.example.com`, all traffic coming through `example.com` will be redirected
-(with a `301` HTTP status) to the matching `www.example.com` URL.
+For example, if your application is accessible via both `example.com` and `www.example.com`, all traffic coming through `example.com` will be redirected (with a `301` HTTP status) to the matching `www.example.com` URL.
 
 ```bash
 $ curl -sI "http://example.com/foo?bar=1"
@@ -94,6 +90,4 @@ $ curl -sI "http://www.example.org/foo?bar=1"
 License
 -------
 
-`PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be
-freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the
-`LICENSE.md` file for more information.
+`PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
