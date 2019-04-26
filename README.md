@@ -10,7 +10,7 @@
 Installation
 ------------
 
-Add `plug_canonical_host` to the `deps` function in your project's `mix.exs` file:
+Add `plug_canonical_host` to the `deps` function in your project’s `mix.exs` file:
 
 ```elixir
 defp deps do
@@ -21,7 +21,7 @@ defp deps do
 end
 ```
 
-Then run `mix do deps.get, deps.compile` inside your project's directory.
+Then run `mix do deps.get, deps.compile` inside your project’s directory.
 
 Usage
 -----
