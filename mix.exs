@@ -14,7 +14,8 @@ defmodule PlugCanonicalHost.Mixfile do
       name: "Plug Canonical Host",
       source_url: "https://github.com/remiprev/plug_canonical_host",
       homepage_url: "https://github.com/remiprev/plug_canonical_host",
-      description: "A Plug for ensuring that all requests are served by a single canonical host",
+      description:
+        "PlugCanonicalHost ensures that all requests are served by a single canonical host. It will redirect all requests from non-canonical hosts to the canonical one.",
       docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]
     ]
   end
