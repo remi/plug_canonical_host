@@ -16,7 +16,7 @@ Add `plug_canonical_host` to the `deps` function in your project's `mix.exs` fil
 defp deps do
   [
     …,
-    {:plug_canonical_host, "~> 1.0.0"}
+    {:plug_canonical_host, "~> 1.0"}
   ]
 end
 ```
