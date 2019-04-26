@@ -91,3 +91,5 @@ License
 -------
 
 `PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
+
+The plug logo is based on [this lovely icon by Vectors Market](https://thenounproject.com/term/usb-plug/298582), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
