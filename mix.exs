@@ -7,7 +7,7 @@ defmodule PlugCanonicalHost.Mixfile do
     [
       app: :plug_canonical_host,
       version: @version,
-      elixir: "~> 1.6",
+      elixir: "~> 1.8",
       deps: deps(),
       package: package(),
       dialyzer: dialyzer(),
