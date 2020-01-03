@@ -3,9 +3,8 @@ sudo: false
 language: elixir
 
 elixir:
-  - 1.6.6
-  - 1.7.4
-  - 1.8.1
+  - 1.8
+  - 1.9
 
 otp_release:
   - 20.3
