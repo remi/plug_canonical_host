@@ -3,12 +3,11 @@
   <br /><br />
   <code>PlugCanonicalHost</code> ensures that all requests are served by a single canonical host.<br /> It will redirect all requests from non-canonical hosts to the canonical one.
   <br /><br />
-  <a href="https://travis-ci.org/remiprev/plug_canonical_host"><img src="https://travis-ci.org/remiprev/plug_canonical_host.svg?branch=master" /></a>
+  <a href="https://travis-ci.org/remi/plug_canonical_host"><img src="https://travis-ci.org/remi/plug_canonical_host.svg?branch=master" /></a>
   <a href="https://hex.pm/packages/plug_canonical_host"><img src="https://img.shields.io/hexpm/v/plug_canonical_host.svg" /></a>
 </p>
 
-Installation
-------------
+## Installation
 
 Add `plug_canonical_host` to the `deps` function in your project’s `mix.exs` file:
 
@@ -23,8 +22,7 @@ end
 
 Then run `mix do deps.get, deps.compile` inside your project’s directory.
 
-Usage
------
+## Usage
 
 `PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost` before all of the other plugs you want to happen after successful redirection to your canonical host.
 
@@ -89,9 +87,8 @@ $ curl -sI "http://www.example.org/foo?bar=1"
 #> HTTP/1.1 200 OK
 ```
 
-License
--------
+## License
 
-`PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remiprev/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
+`PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remi/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
 
 The plug logo is based on [this lovely icon by Vectors Market](https://thenounproject.com/term/usb-plug/298582), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
