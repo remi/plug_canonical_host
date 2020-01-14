@@ -79,9 +79,11 @@ defmodule PlugCanonicalHost do
 
   @spec canonical_port(%Conn{}) :: binary | integer
   defp canonical_port(conn = %Conn{port: port}) do
-    case get_req_header(conn, @forwarded_port_header) do
-      [forwarded_port] -> forwarded_port
-      [] -> port
+    case {get_req_header(conn, @forwarded_port_header), get_req_header(conn, @forwarded_proto_header)} do
+      {[forwarded_port], _} -> forwarded_port
+      {[], ["http"]} -> 80
+      {[], ["https"]} -> 443
+      {[], []} -> port
     end
   end
 
