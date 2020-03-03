@@ -66,7 +66,9 @@ If you want to _exclude_ certain requests from redirecting to the canonical host
 defmodule MyApp.Endpoint do
   plug(:canonical_host)
 
-  defp canonical_host(%Plug.Conn{path: "/ignore-me"} = conn), do: Plug.Conn.send_resp(conn, 200, "👋")
+  defp canonical_host(%Plug.Conn{request_path: "/ignore-me"} = conn) do
+    Plug.Conn.send_resp(conn, 200, "👋")
+  end
 
   defp canonical_host(conn, _opts) do
     :my_app
