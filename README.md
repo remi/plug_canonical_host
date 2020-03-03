@@ -24,12 +24,12 @@ Then run `mix do deps.get, deps.compile` inside your project’s directory.
 
 ## Usage
 
-`PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost` before all of the other plugs you want to happen after successful redirection to your canonical host.
+`PlugCanonicalHost` can be used just as any other plugs. Add `PlugCanonicalHost` before all of the other plugs you want to happen after successful redirect to your canonical host.
 
 The recommended way to define a canonical host is with an environment variable.
 
 ```elixir
-# config/config.exs
+# config/releases.exs
 config :my_app,
   canonical_host: System.get_env("CANONICAL_HOST")
 
@@ -52,7 +52,7 @@ defmodule MyApp.Endpoint do
 end
 ```
 
-For example, if your application is accessible via both `example.com` and `www.example.com`, all traffic coming through `example.com` will be redirected (with a `301` HTTP status) to the matching `www.example.com` URL.
+For example, if your `CANONICAL_HOST` is `www.example.com` but your application is accessible via both `example.com` and `www.example.com`, all traffic coming through `example.com` will be redirected (with a `301` HTTP status) to the matching `www.example.com` URL.
 
 ```bash
 $ curl -sI "http://example.com/foo?bar=1"
@@ -60,35 +60,44 @@ $ curl -sI "http://example.com/foo?bar=1"
 #> Location: http://www.example.com/foo?bar=1
 ```
 
-You can also specify requests to ignore (ie. that will pass through without redirecting to the canonical host).
+If you want to _exclude_ certain requests from redirecting to the canonical host, you can use simple pattern matching in your function arguments:
 
 ```elixir
-opts = PlugCanonicalHost.init(
-  canonical_host: host,
-  ignore: fn(%Conn{host: request_host}) ->
-    # The argument is a `Plug.Conn` struct, which means we
-    # can match on dozen of other fields (headers, query, etc.)
-    #
-    # Reference: https://hexdocs.pm/plug/Plug.Conn.html
+defmodule MyApp.Endpoint do
+  import Plug.Conn
 
-    request_host in ["www.example.org"]
+  plug(:canonical_host)
+
+  defp canonical_host(%Conn{path: "/no-canonical-host-redirect"} = conn), do: send_resp(conn, 200, "👋")
+
+  defp canonical_host(conn, _opts) do
+    :my_app
+    |> Application.get_env(:canonical_host)
+    |> case do
+      host when is_binary(host) ->
+        opts = PlugCanonicalHost.init(canonical_host: host)
+        PlugCanonicalHost.call(conn, opts)
+
+      _ ->
+        conn
+    end
   end
-)
+end
 ```
 
-Assuming `example.com`, `www.example.com` and `www.example.org` all point to our application:
+Now, all requests going to the `/no-canonical-host-redirect` path will skip the canonical host redirect behavior.
 
 ```bash
 $ curl -sI "http://example.com/foo?bar=1"
 #> HTTP/1.1 301 Moved Permanently
 #> Location: http://www.example.com/foo?bar=1
 
-$ curl -sI "http://www.example.org/foo?bar=1"
+$ curl -sI "http://example.com/no-canonical-host-redirect"
 #> HTTP/1.1 200 OK
 ```
 
 ## License
 
-`PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remi/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
+`PlugCanonicalHost` is © 2016-2020 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remi/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
 
 The plug logo is based on [this lovely icon by Vectors Market](https://thenounproject.com/term/usb-plug/298582), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
