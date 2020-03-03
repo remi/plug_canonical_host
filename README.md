@@ -60,33 +60,6 @@ $ curl -sI "http://example.com/foo?bar=1"
 #> Location: http://www.example.com/foo?bar=1
 ```
 
-You can also specify requests to ignore (ie. that will pass through without redirecting to the canonical host).
-
-```elixir
-opts = PlugCanonicalHost.init(
-  canonical_host: host,
-  ignore: fn(%Conn{host: request_host}) ->
-    # The argument is a `Plug.Conn` struct, which means we
-    # can match on dozen of other fields (headers, query, etc.)
-    #
-    # Reference: https://hexdocs.pm/plug/Plug.Conn.html
-
-    request_host in ["www.example.org"]
-  end
-)
-```
-
-Assuming `example.com`, `www.example.com` and `www.example.org` all point to our application:
-
-```bash
-$ curl -sI "http://example.com/foo?bar=1"
-#> HTTP/1.1 301 Moved Permanently
-#> Location: http://www.example.com/foo?bar=1
-
-$ curl -sI "http://www.example.org/foo?bar=1"
-#> HTTP/1.1 200 OK
-```
-
 ## License
 
 `PlugCanonicalHost` is © 2016-2019 [Rémi Prévost](http://exomel.com) and may be freely distributed under the [MIT license](https://github.com/remi/plug_canonical_host/blob/master/LICENSE.md). See the `LICENSE.md` file for more information.
