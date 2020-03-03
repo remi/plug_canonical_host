@@ -64,11 +64,9 @@ If you want to _exclude_ certain requests from redirecting to the canonical host
 
 ```elixir
 defmodule MyApp.Endpoint do
-  import Plug.Conn
-
   plug(:canonical_host)
 
-  defp canonical_host(%Conn{path: "/no-canonical-host-redirect"} = conn), do: send_resp(conn, 200, "👋")
+  defp canonical_host(%Plug.Conn{path: "/ignore-me"} = conn), do: Plug.Conn.send_resp(conn, 200, "👋")
 
   defp canonical_host(conn, _opts) do
     :my_app
@@ -85,14 +83,14 @@ defmodule MyApp.Endpoint do
 end
 ```
 
-Now, all requests going to the `/no-canonical-host-redirect` path will skip the canonical host redirect behavior.
+Now, all requests going to the `/ignore-me` path will skip the canonical host redirect behavior.
 
 ```bash
 $ curl -sI "http://example.com/foo?bar=1"
 #> HTTP/1.1 301 Moved Permanently
 #> Location: http://www.example.com/foo?bar=1
 
-$ curl -sI "http://example.com/no-canonical-host-redirect"
+$ curl -sI "http://example.com/ignore-me"
 #> HTTP/1.1 200 OK
 ```
 
