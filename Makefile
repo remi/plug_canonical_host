@@ -38,11 +38,16 @@ targets:
 dependencies: ## Install dependencies
 	mix deps.get --force
 
+.PHONY: plts
+plts: ## Build Persistent Lookup Tables (PLTs)
+	mkdir -p .plts
+	mix dialyzer --plt
+
 # CI targets
 # ----------
 
 .PHONY: lint
-lint: lint-compile lint-format lint-credo ## Run lint tools on the code
+lint: lint-compile lint-format lint-credo lint-dialyzer ## Run lint tools on the code
 
 .PHONY: lint-compile
 lint-compile:
@@ -55,6 +60,10 @@ lint-format:
 .PHONY: lint-credo
 lint-credo:
 	mix credo --strict
+
+.PHONY: lint-dialyzer
+lint-dialyzer:
+	mix dialyzer --halt-exit-status
 
 .PHONY: test
 test: ## Run the test suite

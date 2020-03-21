@@ -17,10 +17,20 @@ jobs:
             otp-version: 20.x
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-elixir@v1
         with:
-          otp-version: ${{matrix.otp-version}}
-          elixir-version: ${{matrix.elixir-version}}
+          otp-version: ${{ matrix.otp-version }}
+          elixir-version: ${{ matrix.elixir-version }}
+
+      - uses: actions/cache@v1
+        id: plts-cache
+        with:
+          path: .plts
+          key: ${{ runner.os }}-plts-${{ matrix.otp-version }}-${{ matrix.elixir-version }}
+          restore-keys: ${{ runner.os }}-plts-${{ matrix.otp-version }}-
+
       - run: make dependencies
+      - run: make plts
       - run: make lint
       - run: make test
