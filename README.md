@@ -3,7 +3,7 @@
   <br /><br />
   <code>PlugCanonicalHost</code> ensures that all requests are served by a single canonical host.<br /> It will redirect all requests from non-canonical hosts to the canonical one.
   <br /><br />
-  <a href="https://travis-ci.org/remi/plug_canonical_host"><img src="https://travis-ci.org/remi/plug_canonical_host.svg?branch=master" /></a>
+  <a href="https://github.com/remi/plug_canonical_host/actions?query=workflow%3ACI+branch%3Amaster+event%3Apush"><img src="https://github.com/remi/plug_canonical_host/workflows/CI/badge.svg?branch=master&event=push" /></a>
   <a href="https://hex.pm/packages/plug_canonical_host"><img src="https://img.shields.io/hexpm/v/plug_canonical_host.svg" /></a>
 </p>
 
