@@ -12,11 +12,11 @@ defmodule PlugCanonicalHost.Mixfile do
       package: package(),
       dialyzer: dialyzer(),
       name: "Plug Canonical Host",
-      source_url: "https://github.com/remiprev/plug_canonical_host",
-      homepage_url: "https://github.com/remiprev/plug_canonical_host",
+      source_url: "https://github.com/remi/plug_canonical_host",
+      homepage_url: "https://github.com/remi/plug_canonical_host",
       description:
         "PlugCanonicalHost ensures that all requests are served by a single canonical host. It will redirect all requests from non-canonical hosts to the canonical one.",
-      docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remiprev/plug_canonical_host"]
+      docs: [extras: ["README.md"], main: "readme", source_ref: "v#{@version}", source_url: "https://github.com/remi/plug_canonical_host"]
     ]
   end
 
@@ -43,7 +43,7 @@ defmodule PlugCanonicalHost.Mixfile do
       maintainers: ["Rémi Prévost"],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/remiprev/plug_canonical_host"
+        "GitHub" => "https://github.com/remi/plug_canonical_host"
       }
     }
   end
