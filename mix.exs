@@ -21,7 +21,9 @@ defmodule PlugCanonicalHost.Mixfile do
   end
 
   def application do
-    [applications: []]
+    [
+      applications: [:plug]
+    ]
   end
 
   def dialyzer do
@@ -31,9 +33,9 @@ defmodule PlugCanonicalHost.Mixfile do
   defp deps do
     [
       {:plug, " ~> 1.0"},
-      {:credo, "~> 0.6", only: :dev},
-      {:earmark, "~> 1.2", only: :dev},
-      {:ex_doc, "~> 0.19", only: :dev},
+      {:credo, "~> 0.10", only: :dev},
+      {:earmark, "~> 1.4", only: :dev},
+      {:ex_doc, "~> 0.23", only: :dev},
       {:dialyxir, "~> 0.5", only: :dev}
     ]
   end
