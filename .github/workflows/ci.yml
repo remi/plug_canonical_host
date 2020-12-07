@@ -29,8 +29,8 @@ jobs:
         id: plts-cache
         with:
           path: .plts
-          key: ${{ runner.os }}-plts-${{ matrix.otp-version }}-${{ matrix.elixir-version }}
-          restore-keys: ${{ runner.os }}-plts-${{ matrix.otp-version }}-
+          key: v2-${{ runner.os }}-plts-${{ matrix.otp-version }}-${{ matrix.elixir-version }}
+          restore-keys: v2-${{ runner.os }}-plts-${{ matrix.otp-version }}
 
       - run: make dependencies
       - run: make plts
