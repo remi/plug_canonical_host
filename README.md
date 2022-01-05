@@ -62,13 +62,13 @@ $ curl -sI "http://example.com/foo?bar=1"
 
 ### Allow multiple hosts
 
-If you want to support _multiple_ hosts, you can make them skip the canonical host behavior but you’re still going to have to specify a canonical host for unsupported hosts redirects.
+If you want to support _multiple_ hosts, you can make them skip the canonical host behavior but you’re still going to have to specify a canonical host for unknown hosts redirects.
 
 ```elixir
 # config/releases.exs
 config :my_app,
   canonical_host: System.get_env("CANONICAL_HOST"),
-  supported_hosts: String.split(System.get_env("SUPPORTED_HOSTS"), ",")
+  passthrough_hosts: String.split(System.get_env("PASSTHROUGH_HOSTS"), ",")
 
 # lib/my_app/endpoint.ex
 defmodule MyApp.Endpoint do
@@ -76,10 +76,10 @@ defmodule MyApp.Endpoint do
 
   defp canonical_host(%Plug.Conn{host: host} = conn, _opts) do
     canonical_host = Application.get_env(:app, :canonical_host)
-    supported_hosts = Application.get_env(:my_app, :supported_hosts)
+    passthrough_hosts = Application.get_env(:my_app, :passthrough_hosts)
 
     cond do
-      host in supported_hosts ->
+      host in passthrough_hosts ->
         conn
       is_binary(canonical_host) ->
         opts = PlugCanonicalHost.init(canonical_host: canonical_host)
@@ -91,7 +91,7 @@ defmodule MyApp.Endpoint do
 end
 ```
 
-Let’s say we have `CANONICAL_HOST=www.example.com` and `SUPPORTED_HOSTS=foo.example.com,bar.example.com`.
+Let’s say we have `CANONICAL_HOST=www.example.com` and `PASSTHROUGH_HOSTS=foo.example.com,bar.example.com`.
 
 Now, all requests going through `www.example.com`, `foo.example.com` or `bar.example.com` path will skip the canonical host redirect behavior. Other hosts will redirect to `www.example.com`.
 
