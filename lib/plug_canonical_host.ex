@@ -46,7 +46,7 @@ defmodule PlugCanonicalHost do
   """
   @spec call(%Conn{}, opts) :: Conn.t()
   def call(conn = %Conn{host: host}, canonical_host: canonical_host)
-      when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host do
+      when is_nil(canonical_host) == false and canonical_host !== "" and host !== canonical_host and is_binary(host) do
     location = conn |> redirect_location(canonical_host)
 
     conn
