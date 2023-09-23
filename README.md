@@ -52,6 +52,19 @@ defmodule MyApp.Endpoint do
 end
 ```
 
+Or, an even more elegant config:
+
+```elixir
+# config/releases.exs
+config :my_app,
+  canonical_host: System.get_env("CANONICAL_HOST")
+
+# lib/my_app/endpoint.ex
+defmodule MyApp.Endpoint do
+  plug PlugCanonicalHost, canonical_host: Application.get_env(:my_app, :canonical_host)
+end
+```
+
 For example, if your `CANONICAL_HOST` is `www.example.com` but your application is accessible via both `example.com` and `www.example.com`, all traffic coming through `example.com` will be redirected (with a `301` HTTP status) to the matching `www.example.com` URL.
 
 ```bash
