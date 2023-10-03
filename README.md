@@ -55,7 +55,7 @@ end
 Or, an even more elegant config:
 
 ```elixir
-# config/releases.exs
+# config/runtime.exs
 config :my_app,
   canonical_host: System.get_env("CANONICAL_HOST")
 
